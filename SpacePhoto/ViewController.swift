@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         
         photoInfoController.fetchPhotoInfo {(photoInfo: PhotoInfo?) in   //p. 881
             guard let photoInfo: PhotoInfo = photoInfo else {
+                print("no photoInfo");
                 return;
             }
             

@@ -13,7 +13,9 @@ struct PhotoInfoController {
     func fetchPhotoInfo(completion: @escaping (PhotoInfo?) -> Void) {   //p. 880
         
         guard let baseURL: URL = URL(string: "https://api.nasa.gov/planetary/apod") else {
-            fatalError("could not create baseURL");
+            print("could not create baseURL");
+            completion(nil);
+            return;
         }
         
         let query: [String: String] = [
@@ -22,7 +24,9 @@ struct PhotoInfoController {
         ];
     
         guard let url: URL = baseURL.withQueries(query) else {
-            fatalError("could not create url");
+            print("could not create url");
+            completion(nil);
+            return;
         }
         
         let task: URLSessionDataTask = URLSession.shared.dataTask(with: url) {(data: Data?, response: URLResponse?, error: Error?) in
@@ -35,7 +39,9 @@ struct PhotoInfoController {
             }
             
             guard let string: String = String(data: data, encoding: .utf8) else {
-                fatalError("could not change Data into String");
+                print("could not change Data into String");
+                completion(nil);
+                return;
             }
             print(string);
             
